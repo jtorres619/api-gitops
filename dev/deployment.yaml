@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: grade-submission-api
+  name: nginx
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: grade-submission-api
+      app: nginx
   template:
     metadata:
       labels:
-        app: grade-submission-api
+        app: nginx
     spec:
       imagePullSecrets:
       - name: ghcr-secret
       containers:
-      - name: grade-submission-api
-        image: ghcr.io/jtorres619/kubernetes-cicd:4b6b4e51190531f071dee01c637e234ec950c6ab
+      - name: nginx
+        image: nginx:latest
         ports:
         - containerPort: 3000
         resources:
@@ -31,11 +31,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: grade-submission-api
+  name: nginx
   namespace: default
 spec:
   selector:
-    app: grade-submission-api
+    app: nginx
   ports:
   - port: 80
     targetPort: 3000
