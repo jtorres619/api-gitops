@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/jtorres619/api-gitops/'
     targetRevision: HEAD
-    path: website       # <-- points to the Helm chart folder
+    path: dev/website       # <-- points to the Helm chart folder
     helm:
       valueFiles:
         - values.yaml
