@@ -1,0 +1,19 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+  nodePort: 30080
+
+websiteContent: |
+  <html>
+  <body>
+    <h1>Hello from Helm + Kubernetes!</h1>
+    <p>This website is deployed using a Helm chart.</p>
+  </body>
+  </html>
