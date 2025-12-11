@@ -1,14 +1,31 @@
-server:
-  persistentVolume:
-    enabled: true
-    size: 10Gi
+# Prometheus configuration
+prometheus:
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
   service:
     type: ClusterIP
+
+# Alertmanager configuration
 alertmanager:
-  persistentVolume:
-    enabled: true
-    size: 2Gi
+  alertmanagerSpec:
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 2Gi
+
+# Node Exporter
 nodeExporter:
   enabled: true
+
+# Kube State Metrics
 kubeStateMetrics:
   enabled: true
