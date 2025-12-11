@@ -29,7 +29,3 @@ nodeExporter:
 # Kube State Metrics
 kubeStateMetrics:
   enabled: true
-
-# Let Helm install CustomResourceDefinitions (CRDs)
-prometheusOperator:
-  createCustomResource: true
