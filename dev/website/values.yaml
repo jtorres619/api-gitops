@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: simple-website
   tag: latest
-  pullPolicy: Never
+  pullPolicy: Never # This is a workaround in local development
 
 service:
   type: NodePort
