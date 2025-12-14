@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: simple-website
-  tag: latest
+  tag: 1.0
   pullPolicy: Never # This is a workaround in local development
 
   # Command to load image locally:
