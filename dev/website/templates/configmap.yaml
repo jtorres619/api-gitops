@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-content
 data:
-  index.html: |
-{{ .Values.websiteContent | indent 4 }}
+  server.js: |
+{{ .Values.appCode | indent 4 }}

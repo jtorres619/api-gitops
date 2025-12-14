@@ -14,15 +14,16 @@ spec:
         app: {{ .Release.Name }}
     spec:
       containers:
-        - name: nginx
+        - name: node
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["node", "/app/server.js"]
           ports:
-            - containerPort: 80
+            - containerPort: 3000
           volumeMounts:
-            - name: html
-              mountPath: /usr/share/nginx/html
+            - name: app
+              mountPath: /app
       volumes:
-        - name: html
+        - name: app
           configMap:
             name: {{ .Release.Name }}-content
