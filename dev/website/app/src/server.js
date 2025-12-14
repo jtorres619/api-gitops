@@ -35,9 +35,17 @@ const server = http.createServer((req, res) => {
         <h1>Hello from Node.js + Kubernetes!</h1>
         <p>This website is deployed using a Helm chart.</p>
       </div>
+      <div class="container">
+        <a href="/api/health">Check Health</a>
+      </div>
     </body>
     </html>
   `);
+});
+
+// GET /api/health
+server.get('/api/health', (req, res) => {
+  res.json({ status: 'healthy', message: 'Node.js + Kubernetes is running' });
 });
 
 server.listen(PORT, () => {

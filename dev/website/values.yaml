@@ -6,6 +6,7 @@ image:
   pullPolicy: Never # This is a workaround in local development
 
   # Command to load image locally:
+  # docker build -t simple-website:latest .
   # minikube image load simple-website:latest
 
 service:
