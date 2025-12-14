@@ -1,12 +1,34 @@
 const http = require('http');
+const client = require('prom-client');
 
 const PORT = process.env.PORT || 3000;
 
-const server = http.createServer((req, res) => {
+// Create a Registry to register metrics
+const register = new client.Registry();
+
+// Add default metrics (CPU, memory, etc.)
+client.collectDefaultMetrics({ register });
+
+// Create a counter for health endpoint requests
+const healthRequestCounter = new client.Counter({
+  name: 'health_endpoint_requests_total',
+  help: 'Total number of requests to the health endpoint',
+  registers: [register]
+});
+
+const server = http.createServer(async (req, res) => {
   // Health check endpoint
   if (req.url === '/api/health') {
+    healthRequestCounter.inc();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ status: 'healthy', message: 'Node.js + Kubernetes is running' }));
+    return;
+  }
+
+  // Prometheus metrics endpoint
+  if (req.url === '/metrics') {
+    res.writeHead(200, { 'Content-Type': register.contentType });
+    res.end(await register.metrics());
     return;
   }
 
@@ -43,7 +65,7 @@ const server = http.createServer((req, res) => {
       <div class="container">
         <h1>Hello from Node.js + Kubernetes!</h1>
         <p>This website is deployed using a Helm chart.</p>
-        <p><a href="/api/health">Check Health</a></p>
+        <p><a href="/api/health">Check Health</a> | <a href="/metrics">Metrics</a></p>
       </div>
     </body>
     </html>

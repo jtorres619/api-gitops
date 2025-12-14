@@ -8,6 +8,8 @@
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "prom-client": "^15.1.0"
   }
 }
-
