@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Release.Name }}-content
-data:
-  server.js: |
-{{ .Values.appCode | indent 4 }}
