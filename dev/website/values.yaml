@@ -5,7 +5,7 @@ image:
   tag: latest
   pullPolicy: Never # This is a workaround in local development
 
-  # Command tp load image locally:
+  # Command to load image locally:
   # minikube image load simple-website:latest
 
 service:
