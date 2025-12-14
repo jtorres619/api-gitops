@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: simple-website
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Never
 
 service:
   type: NodePort
